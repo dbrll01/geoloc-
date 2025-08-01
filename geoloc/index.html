@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>GEOLOC - Mapa Inteligente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="container">
+    <aside id="painel">
+      <h1>GEOLOC</h1>
+
+      <label for="inputOrigem">📍 Origem (Lat,Lng):</label>
+      <input id="inputOrigem" type="text" placeholder="-23.5505,-46.6333">
+
+      <div class="switch-container">
+        <label class="switch">
+          <input type="checkbox" id="modoNoturno">
+          <span class="slider"></span>
+        </label>
+        <span>Modo Noturno</span>
+      </div>
+
+      <div class="switch-container">
+        <label class="switch">
+          <input type="checkbox" id="heatmapToggle">
+          <span class="slider"></span>
+        </label>
+        <span>Exibir Mapa Térmico</span>
+      </div>
+
+      <div id="infoClima">
+        <h2>Santander</h2>
+        <p class="temperatura">21°C</p>
+        <div id="legendaTemperatura">
+          <span>18°</span>
+          <div class="gradiente"></div>
+          <span>23°</span>
+        </div>
+      </div>
+    </aside>
+
+    <main id="map"></main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Turf.js -->
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+  <!-- Script principal -->
+  <script src="script.js"></script>
+</body>
+</html>

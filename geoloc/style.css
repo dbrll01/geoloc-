@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#container {
+  display: flex;
+  height: 100vh;
+}
+
+#painel {
+  width: 300px;
+  background-color: #1e1e1e;
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#painel h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+#painel label {
+  font-size: 14px;
+}
+
+#painel input[type="text"] {
+  padding: 8px;
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 3px; bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+#infoClima {
+  margin-top: auto;
+}
+
+#infoClima h2 {
+  margin-bottom: 5px;
+}
+
+.temperatura {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0;
+}
+
+#legendaTemperatura {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.gradiente {
+  flex: 1;
+  height: 10px;
+  background: linear-gradient(to right, #00ff00, yellow, orange, red, fuchsia);
+  border-radius: 5px;
+}
+
+#map {
+  height: 100vh; /* ou 100% se estiver dentro de um layout flexível com altura definida */
+  width: 100%;
+  z-index: 0;
+}
+
