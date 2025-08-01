@@ -4,7 +4,7 @@ An interactive web application to calculate distances and areas directly on a ma
 
 ---
 
-## 🌐 Features
+#Features
 
 - Click anywhere on the map to place a marker.
 - Calculate distance between multiple points.
