@@ -17,6 +17,7 @@ import {
 } from './state.js';
 import { parseCoord } from './geo.js';
 import { buscarClima } from './weather.js';
+import { buscarEndereco } from './geocode.js';
 
 const mapa = createMap();
 const ui = createUI({ onLimpar: clearPoints });
@@ -43,18 +44,42 @@ mapa.map.on('click', (e) => {
   carregarClima(lat, lng);
 });
 
-// "Ir" para uma coordenada digitada.
-document.getElementById('btnIrOrigem').addEventListener('click', () => {
-  const coord = parseCoord(document.getElementById('inputOrigem').value);
-  if (!coord) {
-    ui.setResultado('Coordenada inválida. Use o formato: -23.5505,-46.6333');
+// Marca o local buscado no mapa, define como origem e carrega o clima.
+function irPara(lat, lng) {
+  mapa.flyTo(lat, lng);
+  addPoint(lat, lng);
+  setOrigin(getState().points.length - 1);
+  carregarClima(lat, lng);
+}
+
+// "Ir": aceita uma coordenada "lat,lng" OU um endereço / nome de lugar.
+async function buscar() {
+  const texto = document.getElementById('inputOrigem').value.trim();
+  if (!texto) return;
+
+  // 1) Tenta interpretar como coordenada direta.
+  const coord = parseCoord(texto);
+  if (coord) {
+    irPara(coord.lat, coord.lng);
     return;
   }
-  mapa.flyTo(coord.lat, coord.lng);
-  addPoint(coord.lat, coord.lng);
-  setOrigin(getState().points.length - 1);
-  carregarClima(coord.lat, coord.lng);
-});
+
+  // 2) Caso contrário, trata como endereço e geocodifica.
+  ui.setResultado('Buscando endereço…');
+  try {
+    const lugar = await buscarEndereco(texto);
+    if (!lugar) {
+      ui.setResultado('Endereço não encontrado. Tente ser mais específico.');
+      return;
+    }
+    ui.setResultado(lugar.nome);
+    irPara(lugar.lat, lugar.lng);
+  } catch (err) {
+    ui.setResultado('Falha na busca de endereço. Tente novamente.');
+  }
+}
+
+document.getElementById('btnIrOrigem').addEventListener('click', buscar);
 
 // Permite pressionar Enter no campo de coordenada.
 document.getElementById('inputOrigem').addEventListener('keydown', (e) => {

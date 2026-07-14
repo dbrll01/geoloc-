@@ -2,6 +2,7 @@
 // Ambas as APIs são gratuitas e não exigem chave.
 
 import { CONFIG, descreverClima } from './config.js';
+import { nomeDaCidade } from './geocode.js';
 
 let controladorAtual = null;
 
@@ -26,32 +27,11 @@ export async function buscarClima(lat, lng) {
   const clima = await respClima.json();
 
   return {
-    cidade: await buscarCidade(lat, lng, signal),
+    cidade: await nomeDaCidade(lat, lng, signal),
     temperatura: Math.round(clima.current.temperature_2m),
     descricao: descreverClima(clima.current.weather_code),
     horas: proximasHoras(clima.hourly),
   };
-}
-
-/**
- * Geocodificação reversa. Falha aqui não deve derrubar o clima:
- * devolvemos as coordenadas formatadas como fallback.
- */
-async function buscarCidade(lat, lng, signal) {
-  const fallback = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-  try {
-    const url =
-      'https://nominatim.openstreetmap.org/reverse?format=jsonv2' +
-      `&lat=${lat}&lon=${lng}&zoom=10&accept-language=pt-BR`;
-    const resp = await fetch(url, { signal });
-    if (!resp.ok) return fallback;
-    const lugar = await resp.json();
-    const a = lugar.address || {};
-    return a.city || a.town || a.village || a.municipality || lugar.name || fallback;
-  } catch (err) {
-    if (err.name === 'AbortError') throw err;
-    return fallback;
-  }
 }
 
 /** Extrai as próximas N horas de previsão a partir de agora. */
