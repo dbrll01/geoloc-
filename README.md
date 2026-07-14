@@ -9,7 +9,7 @@ An interactive web application to measure distances and areas directly on a map 
 
 - 🖱️ Click anywhere on the map to place a marker (drag to reposition)
 - 📏 Measure the total distance / perimeter between points
-- ⬠ Draw polygons — click near the first point to close — and measure area (m² and hectares)
+- ⬠ Draw polygons — click the first marker and choose "Fechar polígono" (or click near it) — and measure area (m² and hectares)
 - 🌡️ Real-time temperature, conditions and hourly forecast for the clicked spot
 - 🏙️ Automatic city name via reverse geocoding
 - 📍 Jump to any coordinate by typing `lat,lng`
@@ -63,7 +63,7 @@ Then open the printed URL (e.g. `http://localhost:3000`).
 
 1. **Mark points** — click on the map; each point appears in the sidebar.
 2. **Measure distance** — add 2+ points and press **📏 Distância**.
-3. **Measure area** — add 3+ points, click near the first point to close the polygon, then press **⬠ Área**.
+3. **Measure area** — add 3+ points, click the first marker and choose **"Fechar polígono"** (clicking near the first point also closes it), then press **⬠ Área**.
 4. **Check the weather** — the sidebar updates on every click with city, temperature and the next hours.
 5. **Move a point** — drag its marker. **Delete** a point from its popup or the list.
 

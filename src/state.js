@@ -57,6 +57,17 @@ export function setOrigin(index) {
   emit();
 }
 
+/** Fecha o polígono repetindo o 1º ponto no fim do traçado. */
+export function closePolygon() {
+  const pts = state.points;
+  if (pts.length < 3) return;
+  const primeiro = pts[0];
+  const ultimo = pts[pts.length - 1];
+  if (primeiro.lat === ultimo.lat && primeiro.lng === ultimo.lng) return; // já fechado
+  pts.push({ ...primeiro });
+  emit();
+}
+
 export function clearPoints() {
   state.points = [];
   state.originIndex = null;

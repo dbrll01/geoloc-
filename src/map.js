@@ -9,6 +9,7 @@ import {
   updatePoint,
   removePoint,
   setOrigin,
+  closePolygon,
 } from './state.js';
 
 export function createMap() {
@@ -61,11 +62,22 @@ export function createMap() {
     btnOrigem.disabled = isOrigem;
     btnOrigem.onclick = () => setOrigin(index);
 
+    div.append(btnOrigem);
+
+    // No 1º ponto, com 3+ pontos e traçado aberto, oferece fechar o polígono.
+    const { points } = getState();
+    if (index === 0 && points.length >= 3 && !isClosedPolygon(points)) {
+      const btnFechar = document.createElement('button');
+      btnFechar.textContent = '⬠ Fechar polígono';
+      btnFechar.onclick = () => closePolygon();
+      div.append(btnFechar);
+    }
+
     const btnExcluir = document.createElement('button');
     btnExcluir.textContent = 'Excluir ponto';
     btnExcluir.onclick = () => removePoint(index);
 
-    div.append(btnOrigem, btnExcluir);
+    div.append(btnExcluir);
     return div;
   }
 
