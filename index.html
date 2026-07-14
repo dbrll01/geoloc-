@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>GEOLOC — Mapa Inteligente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div id="container">
+    <aside id="painel">
+      <h1>GEOLOC</h1>
+
+      <div class="campo">
+        <label for="inputOrigem">📍 Ir para coordenada (Lat,Lng):</label>
+        <div class="linha-input">
+          <input id="inputOrigem" type="text" placeholder="-23.5505,-46.6333">
+          <button id="btnIrOrigem" title="Marcar ponto e centralizar">Ir</button>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button id="btnDistancia">📏 Distância</button>
+        <button id="btnArea">⬠ Área</button>
+        <button id="btnLimpar" class="perigo">🗑 Limpar</button>
+      </div>
+
+      <div id="resultado" role="status" aria-live="polite"></div>
+
+      <div id="listaPontos">
+        <h3>Pontos marcados</h3>
+        <ul id="coord-list"></ul>
+        <p class="dica">
+          Clique no mapa para marcar. Clique perto do 1º ponto para fechar o
+          polígono. Arraste um pino para movê-lo. Ctrl+Z desfaz.
+        </p>
+      </div>
+
+      <div class="switch-container">
+        <label class="switch">
+          <input type="checkbox" id="modoNoturno">
+          <span class="slider"></span>
+        </label>
+        <span>Modo Noturno</span>
+      </div>
+
+      <div class="switch-container">
+        <label class="switch">
+          <input type="checkbox" id="heatmapToggle">
+          <span class="slider"></span>
+        </label>
+        <span>Exibir Mapa Térmico</span>
+      </div>
+
+      <div id="infoClima" hidden>
+        <h2 id="climaCidade">—</h2>
+        <p class="temperatura" id="climaTemp">—</p>
+        <p id="climaDesc" class="descricao"></p>
+        <div id="previsaoHoras"></div>
+      </div>
+    </aside>
+
+    <main id="map"></main>
+  </div>
+
+  <!-- Bibliotecas (globais usadas pelos módulos) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+
+  <!-- Aplicação (ES Modules) -->
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

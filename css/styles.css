@@ -1,0 +1,291 @@
+:root {
+  --painel-bg: #1e1e1e;
+  --painel-item: #2a2a2a;
+  --acento: #2196f3;
+  --acento-hover: #1976d2;
+  --perigo: #b33;
+  --perigo-hover: #922;
+  --texto-suave: #aaa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+#container {
+  display: flex;
+  height: 100vh;
+}
+
+#painel {
+  width: 320px;
+  flex-shrink: 0;
+  background-color: var(--painel-bg);
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+#painel h1 {
+  font-size: 24px;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+#painel label {
+  font-size: 14px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.linha-input {
+  display: flex;
+  gap: 6px;
+}
+
+#painel input[type='text'] {
+  padding: 8px;
+  flex: 1;
+  min-width: 0;
+  border-radius: 5px;
+  border: none;
+}
+
+#painel button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--acento);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.15s;
+}
+
+#painel button:hover {
+  background-color: var(--acento-hover);
+}
+
+#painel button.perigo {
+  background-color: var(--perigo);
+}
+
+#painel button.perigo:hover {
+  background-color: var(--perigo-hover);
+}
+
+.acoes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.acoes button {
+  flex: 1;
+  white-space: nowrap;
+}
+
+#resultado {
+  font-size: 14px;
+  min-height: 1.2em;
+  color: #9fd89f;
+}
+
+#listaPontos h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+#coord-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 160px;
+  overflow-y: auto;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#coord-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: var(--painel-item);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+#coord-list button {
+  padding: 2px 7px;
+  font-size: 11px;
+  background: #444;
+}
+
+#coord-list button:hover {
+  background: var(--perigo);
+}
+
+.dica {
+  font-size: 11px;
+  color: #888;
+  margin: 8px 0 0;
+  line-height: 1.4;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: '';
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: var(--acento);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+#infoClima {
+  margin-top: auto;
+  border-top: 1px solid #333;
+  padding-top: 12px;
+}
+
+#infoClima h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.temperatura {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.descricao {
+  margin: 4px 0 10px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+#previsaoHoras {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.hora-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--painel-item);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  min-width: 36px;
+}
+
+.hora-item strong {
+  font-size: 14px;
+}
+
+#map {
+  flex: 1;
+  height: 100vh;
+  z-index: 0;
+}
+
+/* Popups dos marcadores */
+.leaflet-popup-content button {
+  display: block;
+  width: 100%;
+  margin: 3px 0;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 4px;
+  background: var(--acento);
+  color: white;
+  cursor: pointer;
+}
+
+.leaflet-popup-content button:disabled {
+  background: #888;
+  cursor: default;
+}
+
+/* Responsivo */
+@media (max-width: 700px) {
+  #container {
+    flex-direction: column;
+  }
+
+  #painel {
+    width: 100%;
+    max-height: 45vh;
+    order: 2;
+  }
+
+  #map {
+    height: 55vh;
+    order: 1;
+  }
+
+  #infoClima {
+    margin-top: 0;
+  }
+}
