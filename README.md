@@ -7,15 +7,15 @@ An interactive web application to measure distances and areas directly on a map 
 
 ## Features
 
-- 🖱️ Click anywhere on the map to place a marker (drag to reposition)
-- 📏 Measure the total distance / perimeter between points
-- ⬠ Draw polygons — click the first marker and choose "Fechar polígono" (or click near it) — and measure area (m² and hectares)
-- 🌡️ Real-time temperature, conditions and hourly forecast for the clicked spot
-- 🏙️ Automatic city name via reverse geocoding
-- 📍 Jump to any coordinate by typing `lat,lng`
-- 🌙 Night mode (dark map tiles)
-- ↩️ Undo the last point with `Ctrl+Z` or `Delete`
-- 📱 Responsive layout
+- Click anywhere on the map to place a marker (drag to reposition)
+- Measure the total distance / perimeter between points
+- Draw polygons — click the first marker and choose "Fechar polígono" (or click near it) — and measure area (m² and hectares)
+- Real-time temperature, conditions and hourly forecast for the clicked spot
+- Automatic city name via reverse geocoding
+- Jump to any coordinate by typing `lat,lng`
+- Night mode (dark map tiles)
+- Undo the last point with `Ctrl+Z` or `Delete`
+- Responsive layout
 
 ## Architecture
 
