@@ -1,5 +1,5 @@
-// Camada de mapa: inicializa o Leaflet, mantém as camadas base (claro/escuro),
-// e redesenha marcadores, traçado e mapa térmico reagindo ao estado.
+// Camada de mapa: inicializa o Leaflet, mantém as camadas base (claro/escuro)
+// e redesenha marcadores e traçado reagindo ao estado.
 
 import { CONFIG } from './config.js';
 import { isClosedPolygon } from './geo.js';
@@ -12,7 +12,11 @@ import {
 } from './state.js';
 
 export function createMap() {
-  const map = L.map('map').setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
+  // zoomAnimation desativada: em alguns ambientes o evento transitionend
+  // não dispara e o zoom animado trava, deixando os controles +/− mortos.
+  // O zoom instantâneo funciona em qualquer ambiente.
+  const map = L.map('map', { zoomAnimation: false })
+    .setView(CONFIG.defaultCenter, CONFIG.defaultZoom);
 
   const camadaClara = L.tileLayer(CONFIG.tiles.light.url, CONFIG.tiles.light.options);
   const camadaEscura = L.tileLayer(CONFIG.tiles.dark.url, CONFIG.tiles.dark.options);
@@ -20,7 +24,6 @@ export function createMap() {
 
   const overlay = L.layerGroup().addTo(map);   // linha / polígono
   const marcadores = L.layerGroup().addTo(map); // pinos
-  let heat = null;
 
   function desenharTracado(points) {
     overlay.clearLayers();
@@ -66,23 +69,10 @@ export function createMap() {
     return div;
   }
 
-  function desenharHeatmap(points, ligado) {
-    if (heat) {
-      map.removeLayer(heat);
-      heat = null;
-    }
-    if (!ligado || points.length === 0) return;
-    heat = L.heatLayer(
-      points.map((p) => [p.lat, p.lng, 1]),
-      CONFIG.heatmap,
-    ).addTo(map);
-  }
-
-  // Um único ponto de renderização reagindo ao estado.
+  // Um único ponto de renderização reagindo ao estado (pontos).
   subscribe((state) => {
     desenharMarcadores(state.points, state.originIndex);
     desenharTracado(state.points);
-    desenharHeatmap(state.points, state.heatmapOn);
   });
 
   return {

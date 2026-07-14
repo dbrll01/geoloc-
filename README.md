@@ -14,7 +14,6 @@ An interactive web application to measure distances and areas directly on a map 
 - 🏙️ Automatic city name via reverse geocoding
 - 📍 Jump to any coordinate by typing `lat,lng`
 - 🌙 Night mode (dark map tiles)
-- 🔥 Heatmap of the marked points
 - ↩️ Undo the last point with `Ctrl+Z` or `Delete`
 - 📱 Responsive layout
 
@@ -31,8 +30,9 @@ geoloc/
     ├── config.js       # constants, tile URLs, weather-code table
     ├── geo.js          # pure geo math (haversine, area, coord parsing)
     ├── state.js        # central state + publish/subscribe
-    ├── map.js          # Leaflet map, layers, markers, heatmap
-    ├── weather.js      # Open-Meteo + Nominatim fetching
+    ├── map.js          # Leaflet map, base layers, markers
+    ├── weather.js      # Open-Meteo current + hourly forecast
+    ├── geocode.js      # Nominatim forward + reverse geocoding
     ├── ui.js           # point list, results, weather panel
     └── main.js         # wires everything together
 ```
@@ -44,9 +44,8 @@ State lives in `state.js`; the map and the UI **subscribe** to it and re-render 
 - [Leaflet.js](https://leafletjs.com/) – interactive maps
 - [OpenStreetMap](https://www.openstreetmap.org/) / [CARTO](https://carto.com/) – map tiles (light / dark)
 - [Turf.js](https://turfjs.org/) – area calculation
-- [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat) – heatmap layer
 - [Open-Meteo](https://open-meteo.com/) – weather & hourly forecast (free, no key)
-- [Nominatim](https://nominatim.org/) – reverse geocoding
+- [Nominatim](https://nominatim.org/) – forward & reverse geocoding
 
 ## Running Locally
 

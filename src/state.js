@@ -9,7 +9,6 @@ const listeners = new Set();
 const state = {
   points: [],       // Array<{ lat, lng }>
   originIndex: null, // índice do ponto marcado como origem, ou null
-  heatmapOn: false,
 };
 
 /** Registra um callback para mudanças de estado. Devolve função de cancelamento. */
@@ -61,10 +60,5 @@ export function setOrigin(index) {
 export function clearPoints() {
   state.points = [];
   state.originIndex = null;
-  emit();
-}
-
-export function setHeatmap(on) {
-  state.heatmapOn = on;
   emit();
 }

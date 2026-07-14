@@ -21,8 +21,6 @@ export const CONFIG = {
       options: { attribution: '© OpenStreetMap © CARTO', maxZoom: 19 },
     },
   },
-
-  heatmap: { radius: 35, blur: 25 },
 };
 
 // Código WMO -> descrição legível (usado pela API Open-Meteo).

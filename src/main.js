@@ -13,7 +13,6 @@ import {
   setOrigin,
   clearPoints,
   removeLast,
-  setHeatmap,
 } from './state.js';
 import { parseCoord } from './geo.js';
 import { buscarClima } from './weather.js';
@@ -86,12 +85,9 @@ document.getElementById('inputOrigem').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') document.getElementById('btnIrOrigem').click();
 });
 
-// Modo noturno e mapa térmico.
+// Modo noturno.
 document.getElementById('modoNoturno').addEventListener('change', (e) => {
   mapa.setDark(e.target.checked);
-});
-document.getElementById('heatmapToggle').addEventListener('change', (e) => {
-  setHeatmap(e.target.checked);
 });
 
 // Ctrl+Z / Delete desfaz o último ponto.
